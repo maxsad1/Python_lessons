@@ -5,9 +5,9 @@ from datetime import datetime
 ## Формирование массива данных
 f = open('weather2018.csv', 'r', encoding='UTF-8')
 weather_stat = []
-for str in f:
-    if not str.startswith('#'):
-        row = str.replace('\n', '')[1:-2]
+for line in f:
+    if not line.startswith('#'):
+        row = line.replace('\n', '')[1:-2]
         if row.count('";"') == 28:
             cols = row.split('";"')
             dt = datetime.strptime(cols[0].split()[0], '%d.%m.%Y').date()
