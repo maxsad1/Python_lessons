@@ -56,6 +56,13 @@ class Book:
     """
     def __init__(self, filename):
         self._filename = filename
+        self._read_info()
+
+    def _read_info(self):
+        """Read first three lines of the file"""
+        self.author = None
+        self.title = None
+        self.annotation = None
 
     def __str__(self):
         return '{}. {}'.format(self.author, self.title)
@@ -70,7 +77,6 @@ class TextBook(Book):
     """
     def __init__(self, filename):
         super().__init__(filename)
-        self._read_info()
 
     def _read_info(self):
         """Read first three lines of the file"""
@@ -86,7 +92,6 @@ class EpubBook(Book):
     """
     def __init__(self, filename):
         super().__init__(filename)
-        self._read_info()
 
     def _read_info(self):
         """Read first three lines of the file"""
