@@ -112,4 +112,4 @@ books_list = lib.books()
 print(books_list)
 
 for b in lib.books():
-    print(b)
+    print(b.title)
