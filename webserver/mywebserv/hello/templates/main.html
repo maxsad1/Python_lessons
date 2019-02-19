@@ -5,7 +5,25 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <h1>Привет, пользователь {{name}}!</h1>
-    <p>Сейчас {{time}}. Ваше счастливое число {{number}}.</p>
+    <h1>Библиотетка</h1>
+    <p>Добро пожаловать.</p>
+    <hr>
+    <p>{{descr|linebreaks}}</p>
+    <hr>
+    
+    {% comment %}
+        можно так 
+        {% if not books %}, 
+        а можно по другому
+        {% if books|length == 0 %}
+    {% endcomment %}
+
+    {% if books|length == 0 %}
+        <p>Ни одной книги нет.</p>
+    {% else %}
+        {% for book in books %}
+            <p>{{book.author}}. {{book.title}}</p>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

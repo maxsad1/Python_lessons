@@ -1,19 +1,47 @@
 from django.shortcuts import render
 from datetime import datetime
 from random import randint
+from django.conf import settings
 
+from hello import library_dir
 # Create your views here.
 
+LIBRARY = settings.LIBRARY
+
 def main(request):
-    # получение данных
-    name = 'Django'
-    t = datetime.now().strftime('%H:%M:%S')
-    num = randint(100000, 999999)
-    # формирование контескта
+    descr = library_dir.read_library_description(LIBRARY)
+    books_info = library_dir.get_all_books_info(LIBRARY)
+    authors = library_dir.get_authors(LIBRARY)
+
+    # books_dict = []
+    # for (author, title, annot, filename) in books_info:
+    #     book = {
+    #         'author': author,
+    #         'title': title,
+    #         'annot': annot,
+    #         'file': filename
+    #     }
+    #     books_dict.append(book)
+
+    data = []
+    for author in authors:
+        auth_data = {
+            'author': author,
+            'books': []
+        }
+        books = []
+        for info in books_info:
+            (info_author, info__title, _, info_file) = info
+            if author == info_author:
+                book = {
+                    'title': info__title,
+                    'file': info_file
+                }
+            books.append(book)
+        auth_data['books'] = books
+        data.append(auth_data)
     context = {
-        'name': name,
-        'time': t,
-        'number': num
+        'descr': descr,
+        'authors': data
     }
-    # вывод шаблона
     return render(request, 'main.html', context)
