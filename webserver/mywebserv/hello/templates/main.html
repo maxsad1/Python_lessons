@@ -21,7 +21,9 @@
         <h3>{{author.author}}</h3>
     <ul>
         {% for book in author.books %}
-            <li>{{book.title}}</li>
+            <li>
+                <a href='/book/{{book.file}}'>{{book.title}}</a>
+            </li>
         {% endfor %}
     </ul>
     {% endfor %}
