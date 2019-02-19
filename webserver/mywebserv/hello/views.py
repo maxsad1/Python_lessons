@@ -9,6 +9,14 @@ from hello import library_dir
 LIBRARY = settings.LIBRARY
 
 def main(request):
+    try:
+        count = request.session['count']
+    except KeyError:
+        count = 0
+
+    count = int(count) 
+    count += 1 
+
     descr = library_dir.read_library_description(LIBRARY)
     books_info = library_dir.get_all_books_info(LIBRARY)
     authors = library_dir.get_authors(LIBRARY)
@@ -33,7 +41,9 @@ def main(request):
     context = {
         'descr': descr,
         'authors': data,
+        'count': count,
     }
+    request.session['count'] = count
     return render(request, 'main.html', context)
 
 def book_info(request, filename):

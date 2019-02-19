@@ -20,4 +20,8 @@
         {% endfor %}
     </ul>
     {% endfor %}
+    {%  if count > 1 %}
+        <hr>
+        <p>Вы были у нас {{count}} раз</p>
+    {% endif %}
 {% endblock %}

@@ -121,3 +121,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LIBRARY = os.path.join(BASE_DIR, 'library')
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
