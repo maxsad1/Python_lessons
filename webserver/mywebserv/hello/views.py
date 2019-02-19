@@ -13,21 +13,11 @@ def main(request):
     books_info = library_dir.get_all_books_info(LIBRARY)
     authors = library_dir.get_authors(LIBRARY)
 
-    # books_dict = []
-    # for (author, title, annot, filename) in books_info:
-    #     book = {
-    #         'author': author,
-    #         'title': title,
-    #         'annot': annot,
-    #         'file': filename
-    #     }
-    #     books_dict.append(book)
-
     data = []
     for author in authors:
         auth_data = {
             'author': author,
-            'books': []
+            'books': [],
         }
         books = []
         for info in books_info:
@@ -35,13 +25,23 @@ def main(request):
             if author == info_author:
                 book = {
                     'title': info_title,
-                    'file': info_file
+                    'file': info_file,
                 }
                 books.append(book)
         auth_data['books'] = books
         data.append(auth_data)
     context = {
         'descr': descr,
-        'authors': data
+        'authors': data,
     }
     return render(request, 'main.html', context)
+
+def book_info(request, filename):
+    book_info = library_dir.read_book_info(LIBRARY, filename)
+    (author, title, annot) = book_info
+    context = {
+        'author': author,
+        'title': title,
+        'annot': annot,
+    }
+    return render(request, 'book_info.html', context)
