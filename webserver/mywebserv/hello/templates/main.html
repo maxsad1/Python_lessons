@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>main</title>
-    <meta charset="utf-8">
-    <style>
-        body {
-            max-width: 60%;
-            margin-left: auto; 
-            margin-right: auto;
-            font-family: 'Arial';
-            font-size: 14pt;
-        }
-    </style>
-</head>
-<body>
-    <h1>Библиотетка</h1>
-    <p>Добро пожаловать.</p>
-    <hr>
+{% extends 'base.html' %}
+{% block title %}Главная страница{% endblock %}
+{% block content %}
     <p>{{descr|linebreaks}}</p>
     <hr>
     <h2>Наши авторы</h2>
@@ -36,5 +20,4 @@
         {% endfor %}
     </ul>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

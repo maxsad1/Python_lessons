@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>main</title>
-    <meta charset="utf-8">
-</head>
-
-<body>
-    <h1>Библиотетка</h1>
-    <p>Добро пожаловать.</p>
-    <hr>
+{% extends 'base.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block content %}
     <h2>{{author}}</h2>
     <h3>{{title}}</h3>
     <p>{{annot}}</p>
     <a href='/'>Назад</a>
-</body>
-</html>
+{% endblock %}

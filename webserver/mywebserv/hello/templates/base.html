@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>main</title>
+    <title>{% block title %} {% endblock %}</title>
     <meta charset="utf-8">
     <style>
         body {
@@ -19,8 +19,8 @@
     <h1>Библиотетка</h1>
     <p>Добро пожаловать.</p>
     <hr>
-    <p>{{descr|linebreaks}}</p>
-    <hr>
+
+    {% block content %} {% endblock %}
 
     <hr>
     <p>Этот сайт учебный</p>
