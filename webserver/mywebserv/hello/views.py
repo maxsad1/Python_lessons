@@ -31,13 +31,13 @@ def main(request):
         }
         books = []
         for info in books_info:
-            (info_author, info__title, _, info_file) = info
+            (info_author, info_title, _, info_file) = info
             if author == info_author:
                 book = {
-                    'title': info__title,
+                    'title': info_title,
                     'file': info_file
                 }
-            books.append(book)
+                books.append(book)
         auth_data['books'] = books
         data.append(auth_data)
     context = {

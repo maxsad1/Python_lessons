@@ -10,20 +10,20 @@
     <hr>
     <p>{{descr|linebreaks}}</p>
     <hr>
-    
-    {% comment %}
-        можно так 
-        {% if not books %}, 
-        а можно по другому
-        {% if books|length == 0 %}
-    {% endcomment %}
-
-    {% if books|length == 0 %}
-        <p>Ни одной книги нет.</p>
-    {% else %}
-        {% for book in books %}
-            <p>{{book.author}}. {{book.title}}</p>
+    <h2>Наши авторы</h2>
+    <ul>
+        {% for author in authors %}
+            <li>{{author.author}}</li>
         {% endfor %}
-    {% endif %}
+    </ul>
+    <hr>
+    {% for author in authors %}
+        <h3>{{author.author}}</h3>
+    <ul>
+        {% for book in author.books %}
+            <li>{{book.title}}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
 </body>
 </html>
