@@ -5,6 +5,7 @@ from time import monotonic as mt
 
 URL = 'https://bash.im/'
 
+
 async def fetch_html(session):
     global URL
     async with session.get(URL) as response:
@@ -14,8 +15,9 @@ async def fetch_html(session):
             # response.text() - текст
             # response.content() - файлы - картинки например
             return data
-        print(f'Error fetching index {idx}')
+        print(f'Error fetching {response.status}')
         return None
+
 
 async def cities_count(session):
     html = await fetch_html(session)
@@ -32,14 +34,15 @@ async def cities_count(session):
 
 
 async def main():
-    async with aiohttp.ClientSession() as session:
-    # Если сертификат сервера не нравится aiohttp, то можно отключить ssl
-    # conn = aiohttp.TCPConnector(ssl=False)
-    # async with aiohttp.ClientSession(connector=conn) as session:
+    async with aiohttp.ClientSession(trust_env=True) as session:
+        # Если сертификат сервера не нравится aiohttp, то можно отключить ssl
+        # conn = aiohttp.TCPConnector(ssl=False)
+        # async with aiohttp.ClientSession(connector=conn) as session:
         count = await cities_count(session)
         print('Count:', count)
+
 
 print('Asynchronous requests')
 t = mt()
 asyncio.run(main())
-print('Finishing in {} sec.'.format(mt()-t))
+print('Finishing in {} sec.'.format(mt() - t))
