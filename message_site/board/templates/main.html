@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+        {% for m in messages %}
+        <div>
+            <h2>{{ m.author_name }} ({{ m.author_mail }})</h2>
+            {{ m.text|linebreaks }}
+        </div>
+        <hr>
+        {% empty %}
+        <div>
+            <p>Ни одного сообщения</p>
+        </div>
+        {% endfor %}
+{% endblock %}
