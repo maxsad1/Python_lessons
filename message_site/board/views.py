@@ -24,7 +24,7 @@ def new_message(request):
             return HttpResponseRedirect("/")
     else:
         form = NewMessageForm()
-    
+
     context = {
         "form": form,
     }
