@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from board.views import main, new_message
+from board.views import main, new_message, random_view, get_phrase
 
 urlpatterns = [
     path('', main, name="main"),
     path('add/', new_message, name="add"),
+    path('random/', random_view, name="random"),
+    path('api/getphrase/', get_phrase, name="getphrase"),
     path('user/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

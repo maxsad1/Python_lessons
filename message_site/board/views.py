@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .models import Message
 from .forms import NewMessageForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+import json
+from random import choice
 
 # from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -31,3 +33,19 @@ def new_message(request):
         "form": form,
     }
     return render(request, "new_message.html", context)
+
+
+def random_view(request):
+    return render(request, "random.html")
+
+
+def get_phrase(request):
+    phrases = [
+        "Привет!",
+        "Пока!",
+        "Как оно?",
+        "Ок"
+    ]
+    phrase = choice(phrases)
+    data = {"phrase": phrase}
+    return HttpResponse(json.dumps(data))
