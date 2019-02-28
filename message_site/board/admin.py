@@ -5,15 +5,13 @@ from .models import Message
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ("author_name", "author_mail", "user",  "post_date")
+    list_display = ("user",  "post_date")
     ordering = ("-post_date", )
     date_hierarchy = "post_date"
-    list_filter = ("author_mail", )
+    # list_filter = ("author_mail", )
     # fields = ("author_name", "author_mail", "post_date", "text")
     fieldsets = [("Author Info", {
         "fields": (
-            "author_name",
-            "author_mail",
             "user",
         )
     }), ("Date Info", {
