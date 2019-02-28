@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .models import Message
-from .forms import NewMessageForm
+from .forms import NewMessageForm, LoginForm
 from django.http import HttpResponseRedirect
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 def main(request):
@@ -20,10 +21,8 @@ def new_message(request):
     if request.method == "POST":
         form = NewMessageForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data["author_name"]
-            mail = form.cleaned_data["author_mail"]
             text = form.cleaned_data["text"]
-            msg = Message(user=request.user, author_name=name, author_mail=mail, text=text)
+            msg = Message(user=request.user, text=text)
             msg.save()
             return HttpResponseRedirect("/")
     else:
@@ -35,10 +34,29 @@ def new_message(request):
     return render(request, "new_message.html", context)
 
 
-@login_required(login_url="/admin/login/")
-def secret(request):
-    user = request.user
-    if user.is_authenticated:
-        return render(request, "secret.html")
+def login_view(request):
+    bad = False
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            new_user = authenticate(username=username, password=password)
+            if new_user:
+                login(request, new_user)
+                return HttpResponseRedirect("/")
+            else:
+                bad = True
     else:
-        return render(request, "forbidden.html")
+        form = LoginForm()
+    context = {
+        "form": form,
+        "bad": bad,
+    }
+    return render(request, "login.html", context)
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return HttpResponseRedirect("/")

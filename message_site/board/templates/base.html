@@ -8,7 +8,21 @@
     <body>
         <h1><a href="{% url 'main' %}">Доска объявлений</a></h1>
         <p>
-            <a href="{% url 'add' %}">Добавить объявление</a>
+            {% if user.is_authenticated %}
+            <p>
+                Здравствуйте, {{ user.first_name }}!<br>
+                <hr>
+                <a href="{% url 'add' %}">Добавить объявление</a>
+            </p>
+        
+            <p>
+                <a href="{% url 'logout' %}">Выйти</a>
+            </p>
+            {% else %}
+            <p>
+                <a href="{% url 'login' %}">Войти</a>
+            </p>
+            {% endif %}
         </p>
         {% block content %}{% endblock %}
     </body>

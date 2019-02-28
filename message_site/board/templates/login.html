@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Вход на сайт</h2>
+<form method="POST">
+    {% csrf_token %}
+    <table border="0">
+        {% if bad %}
+        <tr>
+            <td></td>
+            <td>
+                Неверное имя пользователя или пароль.
+            </td>
+        </tr>
+        {% endif%}
+        {{form}}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Войти на сайт">
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

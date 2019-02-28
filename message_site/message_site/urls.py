@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from board.views import main, new_message, secret
+from board.views import main, new_message, login_view, logout_view
 
 urlpatterns = [
     path('', main, name="main"),
     path('add/', new_message, name="add"),
-    path('secret/', secret, name="secret"),
+    path('login/', login_view, name="login"),
+    path('logout/', logout_view, name="logout"),
     path('admin/', admin.site.urls),
 ]
