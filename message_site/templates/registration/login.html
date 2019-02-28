@@ -4,14 +4,6 @@
 <form method="POST">
     {% csrf_token %}
     <table border="0">
-        {% if bad %}
-        <tr>
-            <td></td>
-            <td>
-                Неверное имя пользователя или пароль.
-            </td>
-        </tr>
-        {% endif%}
         {{form}}
         <tr>
             <td></td>
@@ -19,6 +11,13 @@
                 <input type="submit" value="Войти на сайт">
             </td>
         </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a href="{% url 'password_reset' %}">"Забыли пароль?"></a>
+            </td>
+        </tr>
+
     </table>
 </form>
 {% endblock %}

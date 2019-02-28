@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from .models import Message
-from .forms import NewMessageForm, LoginForm
+from .forms import NewMessageForm
 from django.http import HttpResponseRedirect
 
 # from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
 
 
 def main(request):
@@ -32,31 +31,3 @@ def new_message(request):
         "form": form,
     }
     return render(request, "new_message.html", context)
-
-
-def login_view(request):
-    bad = False
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            new_user = authenticate(username=username, password=password)
-            if new_user:
-                login(request, new_user)
-                return HttpResponseRedirect("/")
-            else:
-                bad = True
-    else:
-        form = LoginForm()
-    context = {
-        "form": form,
-        "bad": bad,
-    }
-    return render(request, "login.html", context)
-
-
-def logout_view(request):
-    if request.user.is_authenticated:
-        logout(request)
-    return HttpResponseRedirect("/")
