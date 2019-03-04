@@ -18,7 +18,7 @@ def load_dataset():
 model = load_model()
 dataset = load_dataset()
 
-data = dataset.sample(30).values
+data = dataset.sample(60).values
 
 X = data[:, :4]
 Y = data[:, 4]

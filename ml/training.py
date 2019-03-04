@@ -1,6 +1,8 @@
-import pandas
-from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
+import pandas
+import pickle
+
+from pandas.plotting import scatter_matrix
 from sklearn import model_selection
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -15,15 +17,15 @@ from sklearn.neural_network import MLPClassifier
 
 dataset = pandas.read_csv("iris.csv")
 
-dataset.plot(kind='box', subplots=True, layout=(2, 2), sharex=False, sharey=False)
-plt.show()
+# dataset.plot(kind='box', subplots=True, layout=(2, 2), sharex=False, sharey=False)
+# plt.show()
 
-scatter_matrix(dataset)
-plt.show()
+# scatter_matrix(dataset)
+# plt.show()
 
 data = dataset.values
 
-val_size = 0.2
+val_size = 0.7
 scoring = "accuracy"
 models = {
 	"LR": LogisticRegression(solver="lbfgs", multi_class="auto", max_iter=1000),
@@ -68,8 +70,6 @@ predictions = model.predict(X_val)
 print("Accuracy =", accuracy_score(Y_val, predictions))
 print(classification_report(Y_val, predictions))
 
-
-import pickle
 
 file = open("lda_model.bin", mode="wb")
 
