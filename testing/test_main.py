@@ -70,3 +70,7 @@ class UserInput(unittest.TestCase):
     def test_three(self):
         res = user_input(21, inp_func=input_single("3"))
         self.assertEqual(res, 3)
+
+    # def test_three(self):
+    #     res = user_input(21, inp_func=input_single("a"))
+    #     self.assertEqual(res, 'strings')

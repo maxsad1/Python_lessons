@@ -1,5 +1,4 @@
 import os
-
 """
 Library                 Book
 -------------------     ------------
@@ -10,10 +9,12 @@ Library                 Book
 - путь к библиотеке     - имя файла
 """
 
+
 class Library:
     """Class Library
 
     """
+
     def __init__(self, lib_dir):
         self._lib_dir = lib_dir
         if not os.path.isdir(self._lib_dir):
@@ -35,12 +36,10 @@ class Library:
         result = []
         for elem in os.scandir(self._lib_dir):
             if elem.is_file():
-                if (elem.name.endswith('.txt') and
-                    elem.name != 'description.txt'):
+                if (elem.name.endswith('.txt') and elem.name != 'description.txt'):
                     b = TextBook(elem.path)
                     result.append(b)
-                elif(elem.name.endswith('.epub') and
-                    elem.name != 'description.txt'):
+                elif (elem.name.endswith('.epub') and elem.name != 'description.txt'):
                     b = EpubBook(elem.path)
                     result.append(b)
         return result
@@ -54,6 +53,7 @@ class Book:
     """Class Book
 
     """
+
     def __init__(self, filename):
         self._filename = filename
         self._read_info()
@@ -75,6 +75,7 @@ class TextBook(Book):
     """Class Text Book
 
     """
+
     def __init__(self, filename):
         super().__init__(filename)
 
@@ -90,6 +91,7 @@ class EpubBook(Book):
     """Class Epub Book
 
     """
+
     def __init__(self, filename):
         super().__init__(filename)
 
@@ -99,7 +101,6 @@ class EpubBook(Book):
         self.author = 'Жюль Верн'
         self.title = 'Таинственный остров'
         self.annotation = 'Таинственный остров'
-
 
 
 # lib = Library(r'D:\MyDocs\python\homework\library_dir\library_dir.py')

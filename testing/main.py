@@ -22,7 +22,7 @@ def user_input(sticks, inp_func=input):
     print("Осталось: ", sticks)
     while True:
         try:
-            val = inp_func("Сколько берете?")
+            val = int(inp_func("Сколько берете?"))
         except ValueError:
             print("Введите число")
             continue
